@@ -128,7 +128,7 @@ export class SidebarComponent implements OnInit {
   initActiveMenu() {
     let pathName = window.location.pathname;
     // Check if the application is running in production
-    if (environment.production) {
+    if (environment.prod) {
       // Modify pathName for production build
       pathName = pathName.replace('/velzon/angular/minimal', '');
     }
@@ -142,7 +142,7 @@ export class SidebarComponent implements OnInit {
       this.removeActivation(activeItems);
 
       let matchingMenuItem = items.find((x: any) => {
-        if (environment.production) {
+        if (environment.prod) {
           let path = x.pathname
           path = path.replace('/velzon/angular/minimal', '');
           return path === pathName;

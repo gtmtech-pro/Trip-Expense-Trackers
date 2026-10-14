@@ -1,0 +1,13 @@
+.modal {
+    display: block;
+}
+
+.mat-mdc-dialog-surface.mdc-dialog__surface {
+    display: contents !important;
+}
+
+// :host ::ng-deep .confirm-dialog-container .mdc-dialog__surface {
+//   display: contents !important;
+//   width: 100% !important;
+//   height: 0px !important;
+// }

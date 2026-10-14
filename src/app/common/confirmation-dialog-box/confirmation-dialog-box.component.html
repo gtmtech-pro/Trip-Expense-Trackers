@@ -1,0 +1,33 @@
+<div class="modal show" tabindex="-1" style="background: rgba(0,0,0,.5); z-index: 2000; padding-top:3%">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Header -->
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    {{ data.heading }}
+                </h5>
+                <button type="button" class="btn-close" (click)="onClose()"></button>
+            </div>
+            <!-- Body -->
+            <div class="modal-body">
+                <p class="text-muted fs-15 mb-4" style="color: #000;">{{ data.message }}</p>
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer">
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-success add-btn" id="create-btn"
+                        (click)="saveOrUpdateJobRequisitionStatusDetails()">
+                        <i class="ri-add-line align-bottom me-1"></i>
+                        Yes
+                    </button>
+                    <button type="button" class="btn btn-info" (click)="onClose()">
+                        <i class="ri-file-download-line align-bottom me-1"></i>
+                        No
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

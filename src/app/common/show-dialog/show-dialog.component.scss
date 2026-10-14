@@ -1,0 +1,28 @@
+.confirm-dialog {
+    padding: 10px !important;
+}
+
+.dialog-message {
+    align-items: center;
+    display: flex;
+}
+
+.dialog-message>span {
+    margin-left: 5px;
+}
+
+.dialog-action {
+    float: right;
+    padding-top: 1px !important;
+
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.dialog-close {
+    float: none;
+    text-align-last: right;
+}

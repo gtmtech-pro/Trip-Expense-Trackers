@@ -14,8 +14,7 @@ const initialState: AuthenticationState = {
     error: null,
 };
 
-export const authenticationReducer = createReducer(
-    initialState,
+export const authenticationReducer = createReducer(initialState,
     on(Register, (state) => ({ ...state, error: null })),
     on(RegisterSuccess, (state, { user }) => ({ ...state, isLoggedIn: true, user, error: null, })),
     on(RegisterFailure, (state, { error }) => ({ ...state, error })),
@@ -24,5 +23,5 @@ export const authenticationReducer = createReducer(
     on(loginSuccess, (state, { user }) => ({ ...state, isLoggedIn: true, user, error: null, })),
     on(loginFailure, (state, { error }) => ({ ...state, error })),
     on(logout, (state) => ({ ...state, user: null })),
-
+    
 );

@@ -1,0 +1,15 @@
+<div class="confirm-dialog">
+    <div class="mt-3">
+        <div class="dialog-close">
+            <button class="btn-close" [mat-dialog-close]="true"></button>
+        </div>
+
+        <div class="dialog-message">
+            <span class="content-span full-width" [innerHtml]="data.message"></span>
+        </div>
+
+        <div class="dialog-action">
+            <button mat-raised-button class="btn btn-link link-success" [mat-dialog-close]="true">OK</button>
+        </div>
+    </div>
+</div>

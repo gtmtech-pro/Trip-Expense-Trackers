@@ -15,3 +15,12 @@ https://github.com/gtmtech-pro/Trip-Expense-Trackers.git
     git remote add origin https://github.com/gtmtech-pro/Trip-Expense-Trackers.git
     git branch -M main
     git push -u origin main
+
+So, for a single file:
+git rm --cached file_to_remove.txt
+
+and for a single directory:
+git rm --cached -r .angular 
+
+git commit -m "Stop tracking angular & dist and keep locally"
+git push origin main

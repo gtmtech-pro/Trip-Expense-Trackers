@@ -1,0 +1,16 @@
+<div class="modal-body p-5 text-center confirm-dialog" style="padding: 2rem !important;">
+    <div class="mt-1 text-center">
+        <h5>{{ data.title }}</h5>
+    </div>
+
+    <div class="mt-3 text-center">
+        <p class="text-muted fs-15 mb-4" style="color: #000;">{{ data.message }}</p>
+
+        <div mat-dialog-actions class="confirm-action">
+            <button mat-raised-button class="btn btn-link link-success fw-medium text-decoration-none"
+                [mat-dialog-close]="true">YES</button>
+            <button mat-flat-button id="no-button" class="btn btn-link link-waring fw-medium text-decoration-none"
+                [mat-dialog-close]="false">NO</button>
+        </div>
+    </div>
+</div>
