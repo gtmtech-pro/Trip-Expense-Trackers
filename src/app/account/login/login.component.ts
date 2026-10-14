@@ -15,6 +15,7 @@ import { TripSettingModel } from '../../models/trip.setting.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BaseComponent } from '../../common/base/base.component';
 import { CookieService } from 'ngx-cookie-service';
+import { ShowDialogService } from '../../shared/show-dialog.service';
 
 @Component({
   selector: 'app-login',
@@ -49,6 +50,7 @@ export class LoginComponent extends BaseComponent<LoginModel> implements OnInit 
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
     private cookieService: CookieService,
+    private showDialogService: ShowDialogService,
     public toastService: ToastService) {
     super(commonService, router, route, snackBar);
 

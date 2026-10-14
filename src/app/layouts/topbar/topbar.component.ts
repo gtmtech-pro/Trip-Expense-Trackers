@@ -1,12 +1,9 @@
 import { Component, OnInit, EventEmitter, Output, Inject, ViewChild, TemplateRef, DOCUMENT } from '@angular/core';
-
+import { Router } from '@angular/router';
 import { EventService } from '../../core/services/event.service';
 
 //Logout
-import { environment } from '../../../environments/environment';
 import { AuthenticationService } from '../../core/services/auth.service';
-import { AuthfakeauthenticationService } from '../../core/services/authfake.service';
-import { Router } from '@angular/router';
 import { TokenStorageService } from '../../core/services/token-storage.service';
 
 // Language
@@ -19,10 +16,10 @@ import { cartData } from './data';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-    selector: 'app-topbar',
-    templateUrl: './topbar.component.html',
-    styleUrls: ['./topbar.component.scss'],
-    standalone: false
+  selector: 'app-topbar',
+  templateUrl: './topbar.component.html',
+  styleUrls: ['./topbar.component.scss'],
+  standalone: false
 })
 export class TopbarComponent implements OnInit {
   messages: any
@@ -46,7 +43,7 @@ export class TopbarComponent implements OnInit {
   notifyId: any;
 
   constructor(@Inject(DOCUMENT) private document: any, private eventService: EventService, public languageService: LanguageService, private modalService: NgbModal,
-    public _cookiesService: CookieService, public translate: TranslateService, private authService: AuthenticationService, private authFackservice: AuthfakeauthenticationService,
+    public _cookiesService: CookieService, public translate: TranslateService, private authService: AuthenticationService,
     private router: Router, private TokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {

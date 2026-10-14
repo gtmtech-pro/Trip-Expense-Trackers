@@ -8,36 +8,25 @@ import { LayoutsModule } from "./layouts/layouts.module";
 import { PagesModule } from "./pages/pages.module";
 
 // Auth
-import {
-  HttpClient,
-  HTTP_INTERCEPTORS,
-  provideHttpClient,
-  withInterceptorsFromDi,
-} from "@angular/common/http";
+import { HttpClient, HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { environment } from "../environments/environment";
-import { initFirebaseBackend } from "./authUtils";
 import { FakeBackendInterceptor } from "./core/helpers/fake-backend";
 import { ErrorInterceptor } from "./core/helpers/error.interceptor";
 import { JwtInterceptor } from "./core/helpers/jwt.interceptor";
 
 // Language
-import {
-  TRANSLATE_HTTP_LOADER_CONFIG,
-  TranslateHttpLoader,
-} from "@ngx-translate/http-loader";
+import { TRANSLATE_HTTP_LOADER_CONFIG, TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
+
 // Store
 import { rootReducer } from "./store";
 import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { EffectsModule } from "@ngrx/effects";
-import { EcommerceEffects } from "./store/Ecommerce/ecommerce_effect";
-import { CRMEffects } from "./store/CRM/crm_effect";
-import { TicketEffects } from "./store/Ticket/ticket_effect";
-import { ApikeyEffects } from "./store/APIKey/apikey_effect";
-import { AuthenticationEffects } from "./store/Authentication/authentication.effects";
 import { provideFlatpickrDefaults } from "angularx-flatpickr";
+
+// services
 import { APP_BASE_HREF, PlatformLocation } from "@angular/common";
 import { BaseService } from "./services/base.service";
 import { HttpService } from "./services/http.service";
@@ -53,7 +42,9 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
   bootstrap: [AppComponent],
   imports: [
     TranslateModule.forRoot({
@@ -65,13 +56,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
       maxAge: 25, // Retains last 25 states
       logOnly: environment.prod, // Restrict extension to log-only mode
     }),
-    EffectsModule.forRoot([
-      AuthenticationEffects,
-      EcommerceEffects,
-      CRMEffects,
-      TicketEffects,
-      ApikeyEffects,
-    ]),
+    EffectsModule.forRoot([]),
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,

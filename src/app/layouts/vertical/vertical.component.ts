@@ -6,10 +6,10 @@ import { RootReducerState } from '../../store';
 import { Store } from '@ngrx/store';
 
 @Component({
-    selector: 'app-vertical',
-    templateUrl: './vertical.component.html',
-    styleUrls: ['./vertical.component.scss'],
-    standalone: false
+  selector: 'app-vertical',
+  templateUrl: './vertical.component.html',
+  styleUrls: ['./vertical.component.scss'],
+  standalone: false
 })
 export class VerticalComponent implements OnInit {
 
@@ -22,18 +22,23 @@ export class VerticalComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe((event: any) => {
       if (document.documentElement.getAttribute('data-preloader') == 'enable') {
+
         if (event instanceof NavigationEnd) {
+          let preloader = document.getElementById("preloader");
+
           // Update the attribute state based on the current route or any other conditions
-          if (event.url !== '/disabled-route') {
-            (document.getElementById("preloader") as HTMLElement).style.opacity = "1";
-            (document.getElementById("preloader") as HTMLElement).style.visibility = "";
-            setTimeout(() => {
+          if (preloader != null) {
+            if (event.url !== '/disabled-route') {
+              (document.getElementById("preloader") as HTMLElement).style.opacity = "1";
+              (document.getElementById("preloader") as HTMLElement).style.visibility = "";
+              setTimeout(() => {
+                (document.getElementById("preloader") as HTMLElement).style.opacity = "0";
+                (document.getElementById("preloader") as HTMLElement).style.visibility = "hidden";
+              }, 1000);
+            } else {
               (document.getElementById("preloader") as HTMLElement).style.opacity = "0";
               (document.getElementById("preloader") as HTMLElement).style.visibility = "hidden";
-            }, 1000);
-          } else {
-            (document.getElementById("preloader") as HTMLElement).style.opacity = "0";
-            (document.getElementById("preloader") as HTMLElement).style.visibility = "hidden";
+            }
           }
         }
       }
@@ -76,8 +81,6 @@ export class VerticalComponent implements OnInit {
       (document.getElementById("preloader") as HTMLElement).style.visibility = "hidden";
     }
   }
-
-
 
   /**
    * On mobile toggle button clicked

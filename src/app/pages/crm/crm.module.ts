@@ -17,7 +17,6 @@ import lottie from 'lottie-web';
 import { CRMRoutingModule } from './crm-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import { DealsComponent } from './deals/deals.component';
-import { LeadsComponent } from './leads/leads.component';
 
 import { DatePipe } from '@angular/common';
 import { SortByCrmPipe } from "../crm/sort-by.pipe";
@@ -26,7 +25,6 @@ import { SortByCrmPipe } from "../crm/sort-by.pipe";
 @NgModule({
   declarations: [
     DealsComponent,
-    LeadsComponent,
     SortByCrmPipe,
   ],
   imports: [

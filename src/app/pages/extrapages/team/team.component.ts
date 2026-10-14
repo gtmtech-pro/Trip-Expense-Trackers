@@ -3,7 +3,6 @@ import { NgbModal, NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { teamModel } from './team.model';
-import { Team } from '../../../core/data';
 
 @Component({
     selector: 'app-team',
@@ -52,7 +51,7 @@ export class TeamComponent {
 
   // Chat Data Fetch
   private _fetchData() {
-    this.Team = Team;
+    //this.Team = Team;
   }
 
   /**
@@ -84,7 +83,7 @@ export class TeamComponent {
   saveTeam() {
     if (this.teamForm.valid) {
       if (this.teamForm.get('_id')?.value) {
-        this.Team = Team.map((order: { id: any; }) => order.id === this.teamForm.get('_id')?.value ? { ...order, ...this.teamForm.value } : order);
+        //this.Team = Team.map((order: { id: any; }) => order.id === this.teamForm.get('_id')?.value ? { ...order, ...this.teamForm.value } : order);
         this.modalService.dismissAll();
       } else {
         const id = '10';

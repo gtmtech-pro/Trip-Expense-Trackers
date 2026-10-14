@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { MENU } from './menu';
 import { MenuItem } from './menu.model';
 import { environment } from '../../../environments/environment';
+import { AuthenticationService } from '../../core/services/auth.service';
 
 @Component({
     selector: 'app-sidebar',
@@ -13,6 +14,10 @@ import { environment } from '../../../environments/environment';
     standalone: false
 })
 export class SidebarComponent implements OnInit {
+  id1Index: number = 201;
+  id2Index: number = 301;
+  id3Index: number = 401;
+  idSubIndex: number = 501;
 
   menu: any;
   toggle: any = true;
@@ -20,7 +25,7 @@ export class SidebarComponent implements OnInit {
   @ViewChild('sideMenu') sideMenu!: ElementRef;
   @Output() mobileMenuButtonClicked = new EventEmitter();
 
-  constructor(private router: Router, public translate: TranslateService) {
+  constructor(private router: Router, public translate: TranslateService, private authenticationService: AuthenticationService) {
     translate.setDefaultLang('en');
   }
 
@@ -41,8 +46,143 @@ export class SidebarComponent implements OnInit {
    */
   ngAfterViewInit() {
     setTimeout(() => {
+          let siteHeaderNavigations = this.authenticationService.getSiteHeaderNavigations();
+      var userRoleTransactions = this.authenticationService.getUserRoleTransactions();
+
+      if (userRoleTransactions != null) {
+        this.menuItems = [];
+        
+        let menuSubItem: MenuItem = {
+          id: 200,
+          label: 'Veejan App',
+          //label: 'MENUITEMS.COMPONENTS.TEXT',
+          isTitle: true,
+          isVisible: true
+        };
+
+        let headerItem = this.menuItems.find((ob: any) => ob.label === 'Veejan App');
+        if (headerItem === undefined) {
+          this.menuItems.push(menuSubItem);
+        }
+
+        // Menu : First Level menu items
+        this.addFirstLevelHeaders(menuSubItem, siteHeaderNavigations, userRoleTransactions);
+      }
+
       this.initActiveMenu();
     }, 0);
+  }
+
+    addFirstLevelHeaders(menuSubItem: any, siteHeaderNavigations: any, userRoleTransactions: any) {
+    let headerDataL1 = siteHeaderNavigations.filter((s: any) => s.Description == null);
+    headerDataL1.forEach((headerDataItemL1: any) => {
+
+      let subItem1 = this.menuItems.find((ob: any) => ob.label === headerDataItemL1.Name);
+      if (subItem1 === undefined) {
+
+        let headerItem1: MenuItem = {
+          id: this.id1Index,
+          label: headerDataItemL1.Name,
+          //label: 'MENUITEMS.DASHBOARD.TEXT',
+          icon: 'las la-tachometer-alt',
+          isCollapsed: true,
+          isVisible: true,
+          parentId: menuSubItem.id,
+          subItems: []
+        };
+
+        let headerDataL2P = siteHeaderNavigations.filter((s: any) => s.Description == headerDataItemL1.Id);
+        let headerDataL2S = userRoleTransactions.filter((s: any) => s.HeaderName == headerDataItemL1.Name);
+        if (headerDataL2P.length > 0 || headerDataL2S.length > 0) {
+          this.menuItems.push(headerItem1);
+          this.id1Index = this.id1Index + 1;
+          this.addSecondLevelHeaders(headerItem1, headerDataItemL1, siteHeaderNavigations, userRoleTransactions)
+          this.addMenuItemsInHeader(headerItem1, headerDataItemL1, userRoleTransactions);
+        }
+      }
+    });
+  }
+
+  addSecondLevelHeaders(headerItem1: any, headerDataItemL1: any, siteHeaderNavigations: any, userRoleTransactions: any) {
+    let headerDataL2 = siteHeaderNavigations.filter((s: any) => s.Description == headerDataItemL1.Id);
+    headerDataL2.forEach((headerDataItemL2: any) => {
+
+      let subItem2 = this.menuItems.find((ob: any) => ob.label === headerDataItemL2.Name);
+      if (subItem2 === undefined) {
+
+        let headerItem2: MenuItem = {
+          id: this.id2Index,
+          label: headerDataItemL2.Name,
+          icon: 'las la-tachometer-alt',
+          isCollapsed: true,
+          isVisible: true,
+          parentId: headerItem1.id,
+          subItems: []
+        };
+
+        let headerDataL3 = siteHeaderNavigations.filter((s: any) => s.Description == headerDataItemL2.Id);
+        if (headerDataL3.length > 0) {
+          headerItem1.subItems.push(headerItem2);
+          this.id2Index = this.id2Index + 1;
+          this.addThirdLevelHeaders(headerItem2, headerDataItemL2, siteHeaderNavigations, userRoleTransactions)
+          this.addMenuItemsInHeader(headerItem2, headerDataItemL2, userRoleTransactions);
+        }
+      }
+    });
+  }
+
+  addThirdLevelHeaders(headerItem2: any, headerDataItemL2: any, siteHeaderNavigations: any, userRoleTransactions: any) {
+    let headerDataL3 = siteHeaderNavigations.filter((s: any) => s.Description == headerDataItemL2.Id);
+    headerDataL3.forEach((headerDataItemL3: any) => {
+
+      let subItem3 = this.menuItems.find((ob: any) => ob.label === headerDataItemL3.Name);
+      if (subItem3 === undefined) {
+
+        let headerItem3: MenuItem = {
+          id: this.id3Index,
+          label: headerDataItemL3.Name,
+          icon: 'las la-tachometer-alt',
+          isCollapsed: true,
+          isVisible: true,
+          parentId: headerItem2.id,
+          subItems: []
+        };
+
+        let transactions = userRoleTransactions.filter((sh: any) => sh.HeaderId == headerDataItemL3.Id || sh.ParentHeaderId == headerDataItemL3.Id);
+        if (transactions.length > 0) {
+          headerItem2.subItems.push(headerItem3);
+          this.id3Index = this.id3Index + 1;
+
+          this.addMenuItemsInHeader(headerItem3, headerDataItemL3, userRoleTransactions);
+        }
+      }
+    });
+  }
+
+  addMenuItemsInHeader(headerItem: any, headerDataItem: any, userRoleTransactions: any) {
+    let transactions = userRoleTransactions.filter((sh: any) => sh.HeaderId == headerDataItem.Id || sh.ParentHeaderId == headerDataItem.Id);
+    transactions.forEach((tranItem: any) => {
+
+      if (tranItem.IsActive == true) {
+        let subItem = this.menuItems.find((ob: any) => ob.link === tranItem.RouteUrl);
+        if (subItem === undefined) {
+
+          let subHeaderItem: MenuItem = {
+            id: this.idSubIndex,
+            label: tranItem.PageTitle,
+            link: tranItem.RouteUrl,
+            icon: 'las la-tachometer-alt',
+            isCollapsed: true,
+            isVisible: true,
+            parentId: headerItem.id,
+            subItems: []
+          };
+
+          headerItem.subItems.push(subHeaderItem);
+          this.idSubIndex = this.idSubIndex + 1;
+        }
+      }
+    });
   }
 
   removeActivation(items: any) {

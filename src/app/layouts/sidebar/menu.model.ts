@@ -9,4 +9,5 @@ export interface MenuItem {
   parentId?: number;
   isLayout?: boolean;
   isCollapsed?: any;
+  isVisible?: boolean
 }

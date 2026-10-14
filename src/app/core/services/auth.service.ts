@@ -1,16 +1,10 @@
 import { Injectable } from '@angular/core';
-import { getFirebaseBackend } from '../../authUtils';
-import { User } from '../../store/Authentication/auth.models';
-import { retry, catchError, map, tap } from 'rxjs/operators';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { retry, catchError, tap } from 'rxjs/operators';
+import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, forkJoin, Observable, of, throwError } from 'rxjs';
-import { GlobalComponent } from "../../global-component";
 import { Store } from '@ngrx/store';
-import { RegisterSuccess, loginFailure, loginSuccess, logout, logoutSuccess } from '../../store/Authentication/authentication.actions';
 import { BaseService } from '../../services/base.service';
 import { UserModel } from '../../models/user.model';
-
-const AUTH_API = GlobalComponent.AUTH_API;
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -25,18 +19,13 @@ const httpOptions = {
 export class AuthenticationService {
     private userSubject: BehaviorSubject<UserModel>;
     public currentUserModel: Observable<UserModel>;
-    user!: User;
-    currentUserValue: any;
+    public currentUserValue: any;
 
-    private currentUserSubject: BehaviorSubject<User>;
-    // public currentUser: Observable<User>;
+    private currentUserSubject: BehaviorSubject<UserModel>;
 
-    public get authUser(): UserModel {
-        return this.userSubject.value;
-    }
 
     constructor(private http: BaseService, private store: Store) {
-        this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(window.sessionStorage.getItem('currentUser')!));
+        this.currentUserSubject = new BehaviorSubject<UserModel>(JSON.parse(window.sessionStorage.getItem('currentUser')!));
         // this.currentUser = this.currentUserSubject.asObservable();
 
         var currentUserJson = window.sessionStorage.getItem('currentUser')!;
@@ -44,90 +33,20 @@ export class AuthenticationService {
         this.currentUserModel = this.userSubject.asObservable();
     }
 
-    /**
-     * Performs the register
-     * @param email email
-     * @param password password
-     */
-    register(email: string, first_name: string, password: string) {
-        // return getFirebaseBackend()!.registerUser(email, password).then((response: any) => {
-        //     const user = response;
-        //     return user;
-        // });
-
-        // Register Api
-        return this.http.post(AUTH_API + 'signup', {
-            email,
-            first_name,
-            password,
-        }, httpOptions).pipe(
-            map((response: any) => {
-                const user = response;
-                return user;
-            }),
-            catchError((error: any) => {
-                const errorMessage = 'Login failed'; // Customize the error message as needed
-                this.store.dispatch(loginFailure({ error: errorMessage }));
-                return throwError(errorMessage);
-            })
-        );
+    public get authUser(): UserModel {
+        return this.userSubject.value;
     }
-
-    /**
-     * Performs the auth
-     * @param email email of user
-     * @param password password of user
-     */
-    login(email: string, password: string) {
-        // return getFirebaseBackend()!.loginUser(email, password).then((response: any) => {
-        //     const user = response;
-        //     return user;
-        // });
-
-        return this.http.post(AUTH_API + 'signin', {
-            email,
-            password
-        }, httpOptions).pipe(
-            map((response: any) => {
-                const user = response;
-                return user;
-            }),
-            catchError((error: any) => {
-                const errorMessage = 'Login failed'; // Customize the error message as needed
-                return throwError(errorMessage);
-            })
-        );
-    }
-
-    /**
-     * Returns the current user
-     */
-    public currentUser(): any {
-        return getFirebaseBackend()!.getAuthenticatedUser();
-    }
-
+     
     /**
      * Logout the user
      */
     logout() {
         this.resetLogin();
-        this.store.dispatch(logout());
         window.sessionStorage.removeItem('currentUser');
         window.sessionStorage.removeItem('token');
         this.currentUserSubject.next(null!);
 
         return of(undefined).pipe();
-    }
-
-    /**
-     * Reset password
-     * @param email email
-     */
-    resetPassword(email: string) {
-        return getFirebaseBackend()!.forgetPassword(email).then((response: any) => {
-            const message = response.data;
-            return message;
-        });
     }
 
     loginUser(formData: any): Observable<any> {
@@ -167,7 +86,6 @@ export class AuthenticationService {
                 })
             );
     }
-
 
     getTripSettings(settingType: any): Observable<any> {
         let formData = { DataId: settingType }
@@ -219,8 +137,6 @@ export class AuthenticationService {
         //this.userSubject.next(null!);
         this.userSubject.next(new UserModel());
     }
-
-
 
     getIPAddress(): Observable<any> {
         return this.http.get("http://api.ipify.org/?format=json").pipe(

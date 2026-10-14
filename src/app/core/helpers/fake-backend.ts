@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
-import { apikeys, projectListWidgets, cryptoOrders } from '../data';
+import { projectListWidgets } from '../data';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -126,53 +126,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return of(new HttpResponse({ status: 200, body: projectListWidgets }));
                 } else {
                     return throwError({ status: 401, error: { message: 'No Data Found' } });
-                }
-            }
-
-            // get apikey
-            if (request.url.endsWith('/app/apikey') && request.method === 'GET') {
-                if (apikeys) {
-                    return of(new HttpResponse({ status: 200, body: apikeys }));
-                } else {
-                    return throwError({ status: 401, error: { message: 'No Data Found' } });
-                }
-            }
-
-            if (request.url.endsWith('/app/apikey') && request.method === 'POST') {
-                const newUser = request.body;
-                if (apikeys) {
-                    return of(new HttpResponse({ status: 200, body: newUser }));
-                } else {
-                    return throwError({ status: 401, error: { message: 'No Data Found' } });
-                }
-            }
-
-            // get Crypto Order
-            if (request.url.endsWith('/app/cryptoOrder') && request.method === 'GET') {
-                if (cryptoOrders) {
-                    return of(new HttpResponse({ status: 200, body: cryptoOrders }));
-                } else {
-                    return throwError({ status: 401, error: { message: 'No Data Found' } });
-                }
-            }
-
-            // Update apikey
-            if (request.url.endsWith('/app/apikey') && request.method === 'PUT') {
-                const updatedUser = request.body;
-                if (apikeys) {
-                    return of(new HttpResponse({ status: 200, body: updatedUser }));
-                } else {
-                    return throwError({ status: 401, error: { message: 'No Data Found' } });
-                }
-            }
-
-            // DELETE apikey
-            if (request.url.endsWith('/app/apikey') && request.method === 'DELETE') {
-                const updatedUser = request.body;
-                if (apikeys) {
-                    return of(new HttpResponse({ status: 200, body: updatedUser })); // respond 200 OK
-                } else {
-                    return throwError({ status: 401, error: { message: 'Unauthorised' } });
                 }
             }
 

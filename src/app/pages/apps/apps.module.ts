@@ -48,10 +48,7 @@ import { AppsRoutingModule } from "./apps-routing.module";
 import { SharedModule } from '../../shared/shared.module';
 
 import { DatePipe } from '@angular/common';
-
 import { SortByPipe } from '../apps/sort-by.pipe';
-import { ApikeyComponent } from './apikey/apikey.component';
-
 
 // Mask
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
@@ -62,7 +59,6 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 @NgModule({
   declarations: [
     SortByPipe,
-    ApikeyComponent,
   ],
   imports: [
     CommonModule,

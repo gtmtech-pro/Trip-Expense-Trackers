@@ -4,7 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-show-dialog',
   templateUrl: './show-dialog.component.html',
-  styleUrls: ['./show-dialog.component.scss']
+  styleUrls: ['./show-dialog.component.scss'],
+  standalone: false
 })
 export class ShowDialogComponent implements OnInit {
 

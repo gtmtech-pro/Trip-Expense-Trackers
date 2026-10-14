@@ -1,4 +1,3 @@
-import { ChartOptions } from "../../store/Ecommerce/ecommerce_model";
 
 /**
  * Best Selling
@@ -163,7 +162,6 @@ const Recentelling = [
   }
 ];
 
-
 /**
  * Stat Counder Data
  */
@@ -198,9 +196,6 @@ const statData = [{
 }
 ];
 
-
-
-
 /**
  * Stat Counder Data
  */
@@ -225,278 +220,6 @@ const cryptostatData = [{
 }
 ];
 
-/**
- * BitCoin Chart
- */
-const cryptoBitcoinChart: ChartOptions = {
-  series: [{
-    name: "Bitcoin",
-    data: [85, 68, 35, 90, 8, 11, 26, 54]
-  },],
-  chart: {
-    width: 130,
-    height: 50,
-    type: "area",
-    sparkline: {
-      enabled: true,
-    },
-    toolbar: {
-      show: false,
-    }
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  stroke: {
-    curve: "smooth",
-    width: 1.5,
-  },
-  fill: {
-    type: "gradient",
-    gradient: {
-      shadeIntensity: 1,
-      inverseColors: false,
-      opacityFrom: 0.45,
-      opacityTo: 0.05,
-      stops: [50, 100, 100, 100],
-    },
-  },
-  colors: ["#0ab39c"]
-};
-
-/**
- * Lite Coin Chart
- */
-const cryptolitecoinChart: ChartOptions = {
-  series: [{
-    name: "Litecoin",
-    data: [25, 50, 41, 87, 12, 36, 9, 54]
-  },],
-  chart: {
-    width: 130,
-    height: 46,
-    type: "area",
-    sparkline: {
-      enabled: true,
-    },
-    toolbar: {
-      show: false,
-    },
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  stroke: {
-    curve: "smooth",
-    width: 1.5,
-  },
-  fill: {
-    type: "gradient",
-    gradient: {
-      shadeIntensity: 1,
-      inverseColors: false,
-      opacityFrom: 0.45,
-      opacityTo: 0.05,
-      stops: [50, 100, 100, 100],
-    },
-  },
-  colors: ["#0ab39c"]
-};
-
-/**
- * Eatherreum Chart
- */
-const cryptoEatherreumChart: ChartOptions = {
-  series: [{
-    name: "Ethereum",
-    data: [36, 21, 65, 22, 35, 50, 29, 44]
-  },],
-  chart: {
-    width: 130,
-    height: 46,
-    type: "area",
-    sparkline: {
-      enabled: true,
-    },
-    toolbar: {
-      show: false,
-    },
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  stroke: {
-    curve: "smooth",
-    width: 1.5,
-  },
-  fill: {
-    type: "gradient",
-    gradient: {
-      shadeIntensity: 1,
-      inverseColors: false,
-      opacityFrom: 0.45,
-      opacityTo: 0.05,
-      stops: [50, 100, 100, 100],
-    },
-  },
-  colors: ["#0ab39c"]
-};
-
-/**
- * Binance Chart
- */
-const cryptoBinanceChart: ChartOptions = {
-  series: [{
-    name: "Binance",
-    data: [30, 58, 29, 89, 12, 36, 9, 54]
-  },],
-  chart: {
-    width: 130,
-    height: 46,
-    type: "area",
-    sparkline: {
-      enabled: true,
-    },
-    toolbar: {
-      show: false,
-    },
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  stroke: {
-    curve: "smooth",
-    width: 1.5,
-  },
-  fill: {
-    type: "gradient",
-    gradient: {
-      shadeIntensity: 1,
-      inverseColors: false,
-      opacityFrom: 0.45,
-      opacityTo: 0.05,
-      stops: [50, 100, 100, 100],
-    },
-  },
-  colors: ["#f06548"]
-};
-
-/**
- * Dash Chart
- */
-const cryptoDashChart: ChartOptions = {
-  series: [{
-    name: "Dash",
-    data: [24, 68, 39, 86, 29, 42, 11, 58]
-  },],
-  chart: {
-    width: 130,
-    height: 46,
-    type: "area",
-    sparkline: {
-      enabled: true,
-    },
-    toolbar: {
-      show: false,
-    },
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  stroke: {
-    curve: "smooth",
-    width: 1.5,
-  },
-  fill: {
-    type: "gradient",
-    gradient: {
-      shadeIntensity: 1,
-      inverseColors: false,
-      opacityFrom: 0.45,
-      opacityTo: 0.05,
-      stops: [50, 100, 100, 100],
-    },
-  },
-  colors: ["#0ab39c"]
-};
-
-/**
- * Tether Chart
- */
-const cryptoTetherChart: ChartOptions = {
-  series: [{
-    name: "Dash",
-    data: [13, 76, 12, 85, 25, 60, 9, 54]
-  },],
-  chart: {
-    width: 130,
-    height: 46,
-    type: "area",
-    sparkline: {
-      enabled: true,
-    },
-    toolbar: {
-      show: false,
-    },
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  stroke: {
-    curve: "smooth",
-    width: 1.5,
-  },
-  fill: {
-    type: "gradient",
-    gradient: {
-      shadeIntensity: 1,
-      inverseColors: false,
-      opacityFrom: 0.45,
-      opacityTo: 0.05,
-      stops: [50, 100, 100, 100],
-    },
-  },
-  colors: ["#0ab39c"]
-};
-
-/**
- * NEO Chart
- */
-const cryptoNeoChart: ChartOptions = {
-  series: [{
-    name: "Neo",
-    data: [9, 66, 41, 89, 12, 36, 25, 54]
-  },],
-  chart: {
-    width: 130,
-    height: 46,
-    type: "area",
-    sparkline: {
-      enabled: true,
-    },
-    toolbar: {
-      show: false,
-    },
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  stroke: {
-    curve: "smooth",
-    width: 1.5,
-  },
-  fill: {
-    type: "gradient",
-    gradient: {
-      shadeIntensity: 1,
-      inverseColors: false,
-      opacityFrom: 0.45,
-      opacityTo: 0.05,
-      stops: [50, 100, 100, 100],
-    },
-  },
-  colors: ["#f06548"]
-};
 
 /**
  * New Currencies
@@ -738,5 +461,5 @@ const analyticTopPages = [
 ];
 
 
-export { analyticstatData, analyticTopPages, BestSelling, TopSelling, Recentelling, statData, cryptostatData, cryptoBitcoinChart, cryptolitecoinChart, cryptoEatherreumChart, cryptoBinanceChart, cryptoDashChart, cryptoTetherChart, cryptoNeoChart, cryptoCurrencies, cryptoTopPerformers, cryptoNewsFeed };
+export { analyticstatData, analyticTopPages, BestSelling, TopSelling, Recentelling, statData, cryptostatData, cryptoCurrencies, cryptoTopPerformers, cryptoNewsFeed };
 

@@ -19,7 +19,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
 
 // Load Icons
-import { defineElement } from "@lordicon/element";
+import { defineElement } from '@lordicon/element';
 import lottie from 'lottie-web';
 
 @NgModule({
@@ -47,6 +47,5 @@ import lottie from 'lottie-web';
 })
 export class LayoutsModule {
   constructor() {
-    defineElement();
   }
 }
